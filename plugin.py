@@ -640,8 +640,8 @@ class zattooGUI(xbmcgui.WindowXMLDialog):
     if action in [ACTION_PARENT_DIR, KEY_NAV_BACK, ACTION_PREVIOUS_MENU]:
       if hasattr(self, 'hideNrTimer'): self.hideNrTimer.cancel()
       self.close()
-      xbmc.executebuiltin("Action(Back)")
-    elif action==ACTION_STOP:
+      xbmc.executebuiltin("Action(Stop)")
+    if action==ACTION_STOP:
       if hasattr(self, 'hideNrTimer'): self.hideNrTimer.cancel()
       self.close()
     elif action==ACTION_OSD:
@@ -778,11 +778,11 @@ def main():
   #xbmcgui.Dialog().notification("HANDLE", str(action)+' '+str(addon_handle), '', 1000, False)
   
   #hack for repeat actions from keyMap 
-  if ((action=='preview' or action=='epg' )and action==xbmcgui.Window(10000).getProperty('ZBElastAction')):
-    xbmcgui.Window(10000).setProperty('ZBElastAction', '')
-    xbmc.executebuiltin("Action(FullScreen)")
-    if(str(_zattooDB_.get_playing()['start'])=='1970-01-01 01:00:00'):makeZattooGUI()
-    return
+  #if ((action=='preview' or action=='epg' )and action==xbmcgui.Window(10000).getProperty('ZBElastAction')):
+    #xbmcgui.Window(10000).setProperty('ZBElastAction', '')
+    #xbmc.executebuiltin("Action(FullScreen)")
+    #if(str(_zattooDB_.get_playing()['start'])=='1970-01-01 01:00:00'):makeZattooGUI()
+    #return
   xbmcgui.Window(10000).setProperty('ZBElastAction', action)
   
   

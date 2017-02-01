@@ -319,6 +319,9 @@ class ZattooDB(object):
         
         show = info.fetchone()
         longDesc = show['description_long']
+        year = show['year']
+        country = show['country']
+        category = show ['category']
         if longDesc is None:
             api = '/zapi/program/details?program_id=' + showID + '&complete=True'
             showInfo = self.zapiSession().exec_zapiCall(api, None)
