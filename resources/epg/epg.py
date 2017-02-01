@@ -25,6 +25,9 @@ import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 
 from resources.zattooDB import ZattooDB
 _zattooDB_ = ZattooDB()
+
+from resources.library import library
+_library_=library()
 # from notification import Notification
 from strings import *
 
@@ -307,6 +310,7 @@ class EPG(xbmcgui.WindowXML):
 			if xbmcgui.Dialog().yesno(program['title'], strings(RECORD_SHOW)):
 				#url = 'plugin://'+__addonId__+'/?mode=record_p&program_id=' + program['showID']
 				setup_recording(program['showID'])
+				return
 			else: return
 		# else if endtime is in the past -> recall
 		elif end < now:
@@ -321,6 +325,7 @@ class EPG(xbmcgui.WindowXML):
 				elif ret==1: #record
 					#url = "plugin://"+__addonId__+"/?mode=record_p&program_id=" + program['showID']
 					setup_recording(program['showID'])
+					return
 				else: return
 		# else currently playing
 		else:
@@ -335,6 +340,7 @@ class EPG(xbmcgui.WindowXML):
 				elif ret==2: #record
 					#url = "plugin://"+__addonId__+"/?mode=record_p&program_id=" + program['showID']
 					setup_recording(program['showID'])
+					return
 				else: return
 		xbmc.executebuiltin('XBMC.RunPlugin(%s)' % url)
 		
