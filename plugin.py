@@ -463,7 +463,8 @@ def change_stream(dir):
   _zattooDB_.set_currentStream(streamNr)
 
   channelInfo = _zattooDB_.get_channelInfo(playing['channel'])
-  program = _zattooDB_.getPrograms({playing['channel']:''}, True)[0]
+  channel_id=_zattooDB_.get_playing()['channel']
+  program = _zattooDB_.getPrograms({'index':[channel_id]}, True)[0]
 
   title = channelInfo['title'] + " (stream" + str(streamNr) + ")"
   listitem = xbmcgui.ListItem(channelInfo['title'], thumbnailImage=channelInfo['logo'])
