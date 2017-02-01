@@ -279,8 +279,8 @@ class ZattooDB(object):
       for row in r:
         description_long = row['description_long']
         year = row['year']
-        country = ['country']
-        category =['category']
+        country = row['country']
+        category =row['category']
         if get_long_description and description_long is None: 
             #description_long = self.getShowInfo(row["showID"],'description')
             info = self.getShowLongDescription(row['showID'])
@@ -288,7 +288,7 @@ class ZattooDB(object):
             if type(info) == dict:
                 description_long = info.get('longDesc','')
                 year = info.get('Year',' ')
-                country = info.get('Country','')
+                country = info.get('country','')
                 category = info.get('category','')
         programList.append({
             'channel': row['channel'],

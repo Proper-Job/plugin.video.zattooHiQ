@@ -820,11 +820,11 @@ def main():
     recording_id = args.get('recording_id')[0]
     delete_recording(recording_id)
   elif action == 'reloadDB':
+    xbmc.executebuiltin("ActivateWindow(busydialog)")
     _zattooDB_.reloadDB()
     xbmcgui.Dialog().notification(localString(31916), localString(30110),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False) 
     _zattooDB_.getProgInfo(True)    
-    xbmcgui.Dialog().notification(localString(31106), localString(31915),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False) 
-    xbmc.executebuiltin("ActivateWindow(busydialog)")
+    xbmcgui.Dialog().notification(localString(31106), localString(31915),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False)   
     _library_.make_library()   
     xbmc.executebuiltin("Dialog.Close(busydialog)")
   elif action == 'changeStream':
