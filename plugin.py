@@ -836,8 +836,10 @@ def main():
     tele.doModal()
     del tele
   elif action == 'makelibrary':
+    xbmc.executebuiltin("ActivateWindow(busydialog)")
     _library_.delete_library()
     _library_.make_library()
+    xbmc.executebuiltin("Dialog.Close(busydialog)")
   elif action == 'resetdir':
     delete = xbmcgui.Dialog().yesno(__addonname__, __addon__.getLocalizedString(31911))
     if delete:
