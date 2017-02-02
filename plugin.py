@@ -52,6 +52,7 @@ __addonname__ = __addon__.getAddonInfo('name')
 
 #_timezone_ = int(__addon__.getSetting('time_offset'))*60*-60 #-time.altzone
 _listMode_ = __addon__.getSetting('channellist')
+
 _channelList_=[]
 _zattooDB_=ZattooDB()
 _library_=library()
