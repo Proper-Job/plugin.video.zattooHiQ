@@ -1,7 +1,6 @@
 # coding=utf-8
 #
-#    ZattooBox Extended
-#
+#    ZattooBox 
 #  Record -Library
 #
 

@@ -1,6 +1,6 @@
 # coding=utf-8
 #
-#    ZattooBox Extended
+#    ZattooBox 
 #
 #  Service on startup
 #  (C)2017 by Steffen Rolapp
