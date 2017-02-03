@@ -505,13 +505,13 @@ class ZattooDB(object):
                 PopUp = xbmcgui.DialogProgress()
                 counter=len(r)
                 bar = 0         # Progressbar (Null Prozent)
-                PopUp.create('ZattooBoxExt - Programmliste aufräumen', '')
+                PopUp.create(localSring(31913), '')
                 PopUp.update(bar)
                 for row in r:
                     c.execute('DELETE FROM programs WHERE showID = ?', (row['showID'],))
                     bar += 1
                     percent = int(bar * 100 / counter)
-                    PopUp.update(percent, 'Datensätze zu löschen ' + str(nr)) 
+                    PopUp.update(percent, str(nr) + localString(31914))
                     if (PopUp.iscanceled()): 
                         c.close
                         return

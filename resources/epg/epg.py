@@ -39,9 +39,6 @@ __language__ = __settings__.getLocalizedString
 localString = __addon__.getLocalizedString
 local = xbmc.getLocalizedString
 
-
-_datename_ = {u'Monday': u'Montag', u'Tuesday': u'Dienstag', u'Wednesday':u'Mittwoch'}
-
 DEBUG=False
 
 ACTION_LEFT = 1
