@@ -1,9 +1,22 @@
 # coding=utf-8
 #
-#    ZattooBox 
-#  Record -Library
+#    copyright (C) 2017 Steffen Rolapp (github@rolapp.de)
 #
-
+#    This file is part of ZattooBox
+#
+#    ZattooBox is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    ZattooBox is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with ZattooBox.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 import sys, urlparse
@@ -64,7 +77,7 @@ class library:
     #xbmcgui.Dialog().notification('Ordner für Filme aktualisiert', __addon__.getLocalizedString(31251),  __addon__.getAddonInfo('path') + '/icon.png', 5000, False)    
       #xbmcgui.Dialog().notification(localString(31106), localString(31915),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False) 
       
-# added - by Samoth  
+  
   def delete_library(self): 
     folder=__addon__.getSetting('library_dir') 
     if not folder: return 
@@ -72,8 +85,7 @@ class library:
     libraryPath = xbmc.translatePath(folder) 
     if os.path.exists(libraryPath) and libraryPath != "": 
       shutil.rmtree(libraryPath)  
-      
-# added - by Samoth
+
   def delete_entry_from_library(self, recording_id): 
     import os, shutil 
     folder=__addon__.getSetting('library_dir') 

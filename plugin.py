@@ -1,24 +1,24 @@
 # coding=utf-8
 #
-#    ZattooBox Extended
+#    copyright (C) 2017 Steffen Rolapp (github@rolapp.de)
 #
-#  Copyright (C) 2015 Daniel Griner (griner.ch@gmail.com)
-#  based on ZattooBox by Pascal Nançoz (nancpasc@gmail.com)
+#    based on ZattooBox extended by Daniel Griner (griner.ch@gmail.com)
+#    based on ZattooBox by Pascal Nançoz (nancpasc@gmail.com)
 #
-#  This Program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2, or (at your option)
-#  any later version.
+#    This file is part of ZattooBox
 #
-#  This Program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#  GNU General Public License for more details.
+#    ZattooBox is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-#  You should have received a copy of the GNU General Public License
-#  along with this Program; see the file LICENSE.txt.  If not, write to
-#  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-#  http://www.gnu.org/copyleft/gpl.html
+#    ZattooBox is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with ZattooBox.  If not, see <http://www.gnu.org/licenses/>.
 #
 
 
@@ -259,7 +259,7 @@ def build_recordingsList(addon_uri, addon_handle):
     if (now>start): color='orange'
     if (now>end): color='green'
     
-    start=datetime.datetime.fromtimestamp(start).strftime('%d.%m.%Y. %H:%M') # NEW changed - by Samoth
+    start=datetime.datetime.fromtimestamp(start).strftime('%d.%m.%Y. %H:%M') 
     label=start+' '
     if record['episode_title']:
       label+='[COLOR '+color+']'+record['title']+'[/COLOR]: '+record['episode_title']
@@ -327,14 +327,14 @@ def setup_recording(program_id):
   params = {'program_id': program_id}
   resultData = _zattooDB_.zapi.exec_zapiCall('/zapi/playlist/program', params)
   xbmcgui.Dialog().ok(__addonname__, __addon__.getLocalizedString(31903))
-  _library_.make_library()  # NEW added - by Samoth
+  _library_.make_library()  
 
 
 def delete_recording(recording_id):
   params = {'recording_id': recording_id}
-  folder=__addon__.getSetting('library_dir') # NEW added - by Samoth
-  if folder: # NEW added - by Samoth
-    _library_.delete_entry_from_library(str(recording_id)) # NEW added - by Samoth	
+  folder=__addon__.getSetting('library_dir') 
+  if folder: 
+    _library_.delete_entry_from_library(str(recording_id)) 
   resultData = _zattooDB_.zapi.exec_zapiCall('/zapi/playlist/remove', params)
   xbmc.executebuiltin('Container.Refresh')
 # times in local timestamps
