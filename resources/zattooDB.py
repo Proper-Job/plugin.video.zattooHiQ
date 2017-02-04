@@ -2,7 +2,7 @@
 #
 #    copyright (C) 2017 Steffen Rolapp (github@rolapp.de)
 #
-#    based on ZattooBox extended by Daniel Griner (griner.ch@gmail.com)
+#    based on ZattooBoxExtended by Daniel Griner (griner.ch@gmail.com) license under GPL
 #    
 #    This file is part of ZattooBox
 #

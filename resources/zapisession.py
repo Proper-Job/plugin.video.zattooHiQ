@@ -2,8 +2,8 @@
 #
 #    copyright (C) 2017 Steffen Rolapp (github@rolapp.de)
 #
-#    based on ZattooBox extended by Daniel Griner (griner.ch@gmail.com)
-#    based on ZattooBox by Pascal Nançoz (nancpasc@gmail.com)
+#    based on ZattooBoxExtended by Daniel Griner (griner.ch@gmail.com) license under GPL
+#    based on ZattooBox by Pascal Nançoz (nancpasc@gmail.com) license under BSD 2 clause
 #
 #    This file is part of ZattooBox
 #
