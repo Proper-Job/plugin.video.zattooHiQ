@@ -76,7 +76,6 @@ class ZattooDB(object):
 
   @staticmethod
   def convert_datetime(ts):
-
     try:
         return datetime.datetime.fromtimestamp(float(ts))
     except ValueError:
@@ -116,7 +115,7 @@ class ZattooDB(object):
 
     try:
       c.execute('CREATE TABLE channels(id TEXT, title TEXT, logo TEXT, weight INTEGER, favourite BOOLEAN, PRIMARY KEY (id) )')
-      c.execute('CREATE TABLE programs(showID TEXT, title TEXT, channel TEXT, start_date TIMESTAMP, end_date TIMESTAMP, description TEXT, description_long TEXT, year TEXT, country TEXT, genre TEXT, category TEXT, image_small TEXT, image_large TEXT, updates_id INTEGER, FOREIGN KEY(channel) REFERENCES channels(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED, FOREIGN KEY(updates_id) REFERENCES updates(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)')
+      c.execute('CREATE TABLE programs(showID TEXT, title TEXT, channel TEXT, start_date TIMESTAMP, end_date TIMESTAMP, series BOOLEAN, description TEXT, description_long TEXT, year TEXT, country TEXT, genre TEXT, category TEXT, image_small TEXT, image_large TEXT, updates_id INTEGER, FOREIGN KEY(channel) REFERENCES channels(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED, FOREIGN KEY(updates_id) REFERENCES updates(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)')
       c.execute('CREATE TABLE updates(id INTEGER, date TIMESTAMP, type TEXT, PRIMARY KEY (id) )')
       c.execute('CREATE TABLE playing(channel TEXT, start_date TIMESTAMP, action_time TIMESTAMP, current_stream INTEGER, streams TEXT, PRIMARY KEY (channel))')
       c.execute('CREATE TABLE showinfos(showID INTEGER, info TEXT, PRIMARY KEY (showID))')
@@ -146,7 +145,7 @@ class ZattooDB(object):
     print "account  "+ self.zapi.AccountData['account']['power_guide_hash']
     api = '/zapi/v2/cached/channels/' + self.zapi.AccountData['account']['power_guide_hash'] + '?details=False'
     channelsData = self.zapi.exec_zapiCall(api, None)
-
+    
     api = '/zapi/channels/favorites'
     favoritesData = self.zapi.exec_zapiCall(api, None)
 
@@ -324,6 +323,7 @@ class ZattooDB(object):
         year = show['year']
         country = show['country']
         category = show ['category']
+        series = show['series']
         if longDesc is None:
             api = '/zapi/program/details?program_id=' + showID + '&complete=True'
             showInfo = self.zapiSession().exec_zapiCall(api, None)
@@ -341,17 +341,20 @@ class ZattooDB(object):
             country = showInfo['program']['country']
             country = country.replace('|',', ')
             info.execute('UPDATE programs SET country=? WHERE showID=?', [country, showID ])
-            
+            series = showInfo['program']['series_recording_eligible']
+            info.execute('UPDATE programs SET series=? WHERE showID=?', [series, showID])
         self.conn.commit()
         info.close()
-        return {'longDesc':longDesc, 'year':year, 'country':country, 'category':category}
+        return {'description':longDesc, 'year':year, 'country':country, 'category':category}
         
   def getShowInfo(self, showID, field='all'):
         if field!='all':
-            api = '/zapi/program/details?program_id=' + str(showID) + '&complete=True'
-            showInfo = self.zapi.exec_zapiCall(api, None)
-            return showInfo['program'].get(field, " ")
-        
+            #api = '/zapi/program/details?program_id=' + str(showID) + '&complete=True'
+            #showInfo = self.zapi.exec_zapiCall(api, None)
+            showInfo = self.getShowLongDescription(showID)
+            #return showInfo['program'].get(field, " ")
+            return showInfo[field]
+            
         #save information for recordings
         import json
         c = self.conn.cursor()
@@ -513,7 +516,7 @@ class ZattooDB(object):
                     c.execute('DELETE FROM programs WHERE showID = ?', (row['showID'],))
                     bar += 1
                     percent = int(bar * 100 / counter)
-                    PopUp.update(percent, str(nr) + localString(31914))
+                    PopUp.update(percent,  str(nr) + localString(31914))
                     if (PopUp.iscanceled()): 
                         c.close
                         return
@@ -550,3 +553,11 @@ class ZattooDB(object):
 			return date
 		else:
 			return ''
+
+  def getSeries(self, showID):
+        c = self.conn.cursor()
+        c.execute('SELECT series FROM programs WHERE showID = ?', [showID])
+        series = c.fetchone()
+        print str(showID)+'  '+str(series['series'])
+        c.close()
+        return series['series']

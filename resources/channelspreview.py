@@ -326,10 +326,10 @@ class ChannelsPreview(xbmcgui.WindowXML): #needs to be WindowXML or onInit won't
         if jump:
             self.showInfo(jump)
         else:
-            if hasattr(self, 'showInfoTimer'): self.showInfoTimer.cancel()
-            self.showInfoTimer = threading.Timer(0.1, self.showInfo)
-            self.showInfoTimer.start()
-        
+            #if hasattr(self, 'showInfoTimer'): self.showInfoTimer.cancel()
+            #self.showInfoTimer = threading.Timer(0.1, self.showInfo)
+            #self.showInfoTimer.start()
+            self.showInfo()
         #controlNr = self.selected%16
         #src = 'http://thumb.zattic.com/' + self.controls[controlNr]['channel'] + '/500x288.jpg?r=' + str(int(time.time()))
         #self.controls[controlNr]['image'].setImage(src, False)

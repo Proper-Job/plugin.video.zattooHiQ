@@ -1,5 +1,5 @@
 # coding=utf-8
-
+#
 #
 #    copyright (C) 2017 Steffen Rolapp (github@rolapp.de)
 #
@@ -95,7 +95,7 @@ class Teletext(xbmcgui.WindowDialog):
 
 		self.currentPage=100
 		self.subPage=1
-		self.showPage(str(self.currentPage), str(self.subPage))
+		self.showPage(str(self.currentPage)#, str(self.subPage))
 
 	def onAction(self, action):
 		if hasattr(self, 'supPageTimer'): self.supPageTimer.cancel()
@@ -158,8 +158,9 @@ class Teletext(xbmcgui.WindowDialog):
 			self.pageInputCtrl.setLabel(str(self.currentPage))
 			self.pageInputCtrl.setVisible(True)
 		url='https://zapi.zattoo.com/teletext/'+self.channelID+'/hd/'+page+'/'+str(subpage)+'.html'
+		#print 'TELETEXT  -  ' + str(url)
 		#url="https://zapi.zattoo.com/teletext/sf-1/hd/100/1.html"
-		#print('teletext image:'+url)
+		print('teletext image:'+url)
 
 		req=urllib2.Request(headers={'User-Agent':'Mozilla/5.0','Cache-Control':'max-age=0'}, url=url)
 		try:

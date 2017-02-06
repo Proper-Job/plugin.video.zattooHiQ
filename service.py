@@ -18,6 +18,7 @@
 #    along with ZattooBox.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+
 import xbmc, xbmcgui, xbmcaddon, datetime, time
 import os, urlparse
 from resources.library import library 
@@ -26,7 +27,7 @@ _zattooDB_ = ZattooDB()
 __addon__ = xbmcaddon.Addon()
 _library_=library()
 localString = __addon__.getLocalizedString
-
+SWISS = __addon__.getSetting('swiss')
               
 def refreshProg():
     import urllib
@@ -37,7 +38,7 @@ def refreshProg():
         _zattooDB_ = ZattooDB()
         #update programInfo    
         startTime=datetime.datetime.now()
-        endTime=datetime.datetime.now()+datetime.timedelta(minutes = 20)
+        endTime=datetime.datetime.now()+datetime.timedelta(minutes = 120)
         print 'StartRefresh  ' + str(datetime.datetime.now())
         try:
             _zattooDB_.getProgInfo(False, startTime, endTime)
@@ -68,14 +69,15 @@ def start():
     xbmcgui.Dialog().notification(localString(31916), localString(30110),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False) 
     _zattooDB_.getProgInfo(True, startTime, endTime)
     
-    xbmcgui.Dialog().notification(localString(31106), localString(31915),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False) 
-    xbmc.executebuiltin("ActivateWindow(busydialog)")
-    recInfo()
-    _library_.delete_library() # add by samoth
-    _library_.make_library()   
-    xbmc.executebuiltin("Dialog.Close(busydialog)")
-
-    refreshProg()  
+    if SWISS == 'true':
+        xbmcgui.Dialog().notification(localString(31106), localString(31915),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False) 
+        xbmc.executebuiltin("ActivateWindow(busydialog)")
+        recInfo()
+        _library_.delete_library() # add by samoth
+        _library_.make_library()   
+        xbmc.executebuiltin("Dialog.Close(busydialog)")
+    
+        refreshProg()  
 
 
 
