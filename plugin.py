@@ -141,13 +141,7 @@ def build_directoryContent(content, addon_handle, cache=True, root=False, con='m
     li.setInfo('video', {'category':record['category']})
     li.setProperty('fanart_image', record['thumbnail'])
     li.select(record['selected'])
-    
-    if con == 'files':
-      print 'Content ' + str(con)
-      contextMenuItems = []
-      #contextMenuItems.append((localString(31921), 'RunPlugin("plugin://'+__addonId__+'/?mode=epg'+'")'))
-      li.addContextMenuItems(contextMenuItems, replaceItems=True)
-      
+          
     xbmcplugin.addDirectoryItem(handle=addon_handle, url=record['url'], listitem=li, isFolder=record['isFolder'])
     
   xbmcplugin.endOfDirectory(addon_handle, True, root, cache)
@@ -191,7 +185,7 @@ def build_root(addon_uri, addon_handle):
 #    {'title': localString(31023), 'image': iconPath, 'isFolder': True, 'url': addon_uri + '?' + urllib.urlencode({'mode': 'reloadDB'})},
     {'title': '[COLOR ff333333]' + localString(31107) + '[/COLOR]', 'image': iconPath, 'isFolder': False, 'url': addon_uri + '?' + urllib.urlencode({'mode': 'show_settings'})},
     ]
-  build_directoryContent(content, addon_handle, True, False, 'files')
+  build_directoryContent(content, addon_handle, True, False, 'listing')
 
   #update db
   _zattooDB_.updateChannels()

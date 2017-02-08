@@ -433,6 +433,7 @@ class ZattooDB(object):
     c = self.conn.cursor()
     c.execute('SELECT * FROM channels WHERE title= ? ', [channeltitle])
     row = c.fetchone()
+    print 'Title ' +str(channeltitle)
     if row:
       channelid=row['id']
     self.conn.commit()
