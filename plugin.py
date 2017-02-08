@@ -185,7 +185,7 @@ def build_root(addon_uri, addon_handle):
 #    {'title': localString(31023), 'image': iconPath, 'isFolder': True, 'url': addon_uri + '?' + urllib.urlencode({'mode': 'reloadDB'})},
     {'title': '[COLOR ff333333]' + localString(31107) + '[/COLOR]', 'image': iconPath, 'isFolder': False, 'url': addon_uri + '?' + urllib.urlencode({'mode': 'show_settings'})},
     ]
-  build_directoryContent(content, addon_handle, True, False, 'listing')
+  build_directoryContent(content, addon_handle, True, False, 'files')
 
   #update db
   _zattooDB_.updateChannels()
