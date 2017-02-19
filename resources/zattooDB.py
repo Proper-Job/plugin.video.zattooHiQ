@@ -4,20 +4,20 @@
 #
 #    based on ZattooBoxExtended by Daniel Griner (griner.ch@gmail.com) license under GPL
 #    
-#    This file is part of ZattooBox
+#    This file is part of ZattooHiQ
 #
-#    ZattooBox is free software: you can redistribute it and/or modify
+#    zattooHiQ is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
-#    ZattooBox is distributed in the hope that it will be useful,
+#    zattooHiQ is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
 #    You should have received a copy of the GNU General Public License
-#    along with ZattooBox.  If not, see <http://www.gnu.org/licenses/>.
+#    along with zattooHiQ.  If not, see <http://www.gnu.org/licenses/>.
 #
 
 import xbmc, xbmcgui, xbmcaddon, os, xbmcplugin, datetime, time
@@ -61,7 +61,7 @@ class ZattooDB(object):
     if zapiSession.init_session(__addon__.getSetting('username'), __addon__.getSetting('password')):
       return zapiSession
     else:
-      # show home window, zattoobox settings and quit
+      # show home window, zattooHiQ settings and quit
       xbmc.executebuiltin('ActivateWindow(10000)')
       xbmcgui.Dialog().ok(__addon__.getAddonInfo('name'), __addon__.getLocalizedString(31902))
       __addon__.openSettings()
@@ -226,14 +226,14 @@ class ZattooDB(object):
         if not c.rowcount:
             c.execute('UPDATE programs SET channel=?, title=?, start_date=?, end_date=?, description=?, genre=?, image_small=? WHERE showID=?',
               [cid, program['t'], program['s'], program['e'], program['et'], ', '.join(program['g']), image, program['id'] ])            
+                
+    if count>0: 
+      c.execute('INSERT into updates(date, type) VALUES(?, ?)', [date, 'program']) 
+             
     try:
         self.conn.commit() 
     except:
-			print 'IntegrityError: FOREIGN KEY constraint failed zattooDB 232'
-            
-    if count>0: 
-      c.execute('INSERT into updates(date, type) VALUES(?, ?)', [date, 'program'])        
-    
+        print 'IntegrityError: FOREIGN KEY constraint failed zattooDB 232'
     xbmc.executebuiltin("Dialog.Close(busydialog)")
     c.close()
     return
@@ -335,8 +335,10 @@ class ZattooDB(object):
             showInfo = self.zapiSession().exec_zapiCall(api, None)
             if showInfo is None:
                 longDesc=''
+                year=''
+                category=''
                 info.close()
-                return longDesc            
+                return {'description':longDesc, 'year':year, 'country':country, 'category':category}          
             longDesc = showInfo['program']['description']
             info.execute('UPDATE programs SET description_long=? WHERE showID=?', [longDesc, showID ])
             year = showInfo['program']['year']
@@ -477,7 +479,7 @@ class ZattooDB(object):
                 for row in r:
                     counter += 1
             bar = 0         # Progressbar (Null Prozent)
-            PopUp.create('ZattooBoxExt lade Programm Informationen ...', '')
+            PopUp.create('zattooHiQ lade Programm Informationen ...', '')
             PopUp.update(bar)
         
         for chan in channels['index']:
@@ -504,7 +506,7 @@ class ZattooDB(object):
         return 
 
   def cleanProg(self):
-        d = (datetime.date.today() - datetime.timedelta(days=8))
+        d = (datetime.datetime.today() - datetime.timedelta(days=8))
         midnight = datetime.time(0)
         datelow = datetime.datetime.combine(d, midnight)
         print 'CleanUp  ' + str(datelow)

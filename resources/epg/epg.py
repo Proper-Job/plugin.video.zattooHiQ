@@ -4,20 +4,20 @@
 # 	 based on ZattooBoxExtended by Daniel Griner (griner.ch@gmail.com) license under GPL
 # 	 based on TVGuide by	Tommy Winther http://tommy.winther.nu
 # 
-#    This file is part of ZattooBox
+#    This file is part of zattooHiQ
 #
-#    ZattooBox is free software: you can redistribute it and/or modify
+#    zattooHiQ is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
-#    ZattooBox is distributed in the hope that it will be useful,
+#    zattooHiQ is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
 #    You should have received a copy of the GNU General Public License
-#    along with ZattooBox.  If not, see <http://www.gnu.org/licenses/>.
+#    along with zattooHiQ.  If not, see <http://www.gnu.org/licenses/>.
 #
 
 import datetime, time, os, locale

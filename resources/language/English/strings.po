@@ -572,7 +572,7 @@ msgid "Download TV shows"
 msgstr ""
 
 msgctxt "#31918"
-msgid "ZattooBox - List of programs"
+msgid "ZattooHiQ - List of programs"
 msgstr ""
 
 msgctxt "#31920"
@@ -584,7 +584,7 @@ msgid "delete recording"
 msgstr ""
 
 msgctxt "#31922"
-msgid "ZattooBox Download program information ..."
+msgid "ZattooHiQ Download program information ..."
 msgstr ""
 
 msgctxt "#31923"

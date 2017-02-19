@@ -2,20 +2,20 @@
 #
 #    copyright (C) 2017 Steffen Rolapp (github@rolapp.de)
 #
-#    This file is part of ZattooBox
+#    This file is part of zattooHiQ
 #
-#    ZattooBox is free software: you can redistribute it and/or modify
+#    zattooHiQ is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
-#    ZattooBox is distributed in the hope that it will be useful,
+#    zattooHiQ is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
 #    You should have received a copy of the GNU General Public License
-#    along with ZattooBox.  If not, see <http://www.gnu.org/licenses/>.
+#    along with zattooHiQ.  If not, see <http://www.gnu.org/licenses/>.
 #
 
 
@@ -40,7 +40,9 @@ def refreshProg():
         startTime=datetime.datetime.now()
         endTime=datetime.datetime.now()+datetime.timedelta(minutes = 120)
         print 'StartRefresh  ' + str(datetime.datetime.now())
+        
         try:
+            getProgNextDay()
             _zattooDB_.getProgInfo(False, startTime, endTime)
         except:
             print 'ERROR on REFRESH'
@@ -78,7 +80,17 @@ def start():
         xbmc.executebuiltin("Dialog.Close(busydialog)")
     
         refreshProg()  
-
+        
+def getProgNextDay():
+    
+    start = datetime.time(18, 0, 0)
+    now = datetime.datetime.now().time()
+    tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
+    
+    if now > start:
+        print 'NextDay ' + str(start) + ' - ' + str(now) + ' - ' + str(tomorrow)
+        _zattooDB_.updateProgram(tomorrow)
+        
 
 
 if __addon__.getSetting('dbonstart') == 'true': start()

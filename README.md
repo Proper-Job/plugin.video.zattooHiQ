@@ -1,4 +1,4 @@
-# ZattooBox
+# ZattooHiQ
 ###Zattoo Live TV, recorded shows and EPG.
 - switch between favourites/all channels
 - channels preview
