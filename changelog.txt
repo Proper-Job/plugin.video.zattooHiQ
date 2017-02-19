@@ -3,5 +3,5 @@
 =====================================
 
 - ZattooHiQ is based on ZattooBox form Pascal Nançoz
-  and ZattooBox Extended from Daniel Griner
+  and ZattooBox Extended from Daniel Griner modify by L0RE
 
