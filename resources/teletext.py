@@ -87,11 +87,27 @@ class Teletext(xbmcgui.WindowDialog):
 		self.button0 = xbmcgui.ControlButton(50, 640, 170, 40, localString(31912), font='font20', alignment=6)
 		self.addControl(self.button0)
 		
-		self.button1 = xbmcgui.ControlButton(1090, 640, 50, 40, "<", font='font30', alignment=6)
+		self.button1 = xbmcgui.ControlButton(1090, 640, 60, 40, "<", font='font30', alignment=6)
 		self.addControl(self.button1)
 		
-		self.button2 = xbmcgui.ControlButton(1190, 640, 50, 40, ">", font='font30', alignment=6)
+		self.button2 = xbmcgui.ControlButton(1180, 640, 60, 40, ">", font='font30', alignment=6)
 		self.addControl(self.button2)
+		
+		self.button3 = xbmcgui.ControlButton(50, 580, 60, 40, "<", font='font30', alignment=6)
+		self.addControl(self.button3)
+		
+		self.button4 = xbmcgui.ControlButton(1180, 40, 60, 40, "X", font='font30', alignment=6)
+		self.addControl(self.button4)
+		
+		self.button5 = xbmcgui.ControlButton(160, 580, 60, 40, ">", font='font30', alignment=6)
+		self.addControl(self.button5)
+		
+		self.button6 = xbmcgui.ControlButton(50, 520, 60, 40, "<<", font='font30', alignment=6)
+		self.addControl(self.button6)
+		
+		self.button7 = xbmcgui.ControlButton(160, 520, 60, 40, ">>", font='font30', alignment=6)
+		self.addControl(self.button7)
+
 
 		self.currentPage=100
 		self.subPage=1
@@ -100,8 +116,8 @@ class Teletext(xbmcgui.WindowDialog):
 	def onAction(self, action):
 		if hasattr(self, 'supPageTimer'): self.supPageTimer.cancel()
 		action = action.getId()
-		#print('action:'+str(action))
-		if action in [ACTION_PARENT_DIR, KEY_NAV_BACK, ACTION_PREVIOUS_MENU]:
+		print('action:'+str(action))
+		if action in [ACTION_PARENT_DIR, KEY_NAV_BACK, ACTION_PREVIOUS_MENU, ACTION_MOUSE_RIGHT_CLICK]:
 			if self.imagePath: os.remove(self.imagePath)
 			self.close()
 			
@@ -121,10 +137,10 @@ class Teletext(xbmcgui.WindowDialog):
 		elif action in [ACTION_MOVE_UP, ACTION_GESTURE_SWIPE_UP]:
 			self.currentPage=(int(self.currentPage/100)+1)*100
 			self.showPage(str(self.currentPage), str(self.subPage))
-		elif action in [ACTION_MOVE_RIGHT, ACTION_GESTURE_SWIPE_RIGHT]:
+		elif action in [ACTION_MOVE_RIGHT, ACTION_GESTURE_SWIPE_RIGHT, ACTION_MOUSE_WHEEL_UP]:
 			self.currentPage +=1
 			self.showPage(str(self.currentPage), str(self.subPage))
-		elif action in [ACTION_MOVE_LEFT, ACTION_GESTURE_SWIPE_LEFT]:
+		elif action in [ACTION_MOVE_LEFT, ACTION_GESTURE_SWIPE_LEFT, ACTION_MOUSE_WHEEL_DOWN]:
 			self.currentPage -=1
 			self.showPage(str(self.currentPage), str(self.subPage))
 		elif action == ACTION_PAGE_DOWN:
@@ -152,6 +168,26 @@ class Teletext(xbmcgui.WindowDialog):
 			self.subPage = self.subPage+1
 			self.showPage(str(self.currentPage),self.subPage)
 			
+		elif control == self.button3:
+			self.currentPage -=1
+			self.showPage(str(self.currentPage), str(self.subPage))
+		
+		elif control == self.button5:
+			self.currentPage +=1
+			self.showPage(str(self.currentPage), str(self.subPage))
+			
+		elif control == self.button4:
+			if self.imagePath: os.remove(self.imagePath)
+			self.close()
+			
+		elif control == self.button6:
+			self.currentPage=(int((self.currentPage-1)/100))*100
+			if self.currentPage<100: self.currentPage=100
+			self.showPage(str(self.currentPage), str(self.subPage))
+			
+		elif control == self.button7:
+			self.currentPage=(int(self.currentPage/100)+1)*100
+			self.showPage(str(self.currentPage), str(self.subPage))
 				
 	def showPage(self, page, subpage=1):
 		if (subpage==1):
