@@ -664,7 +664,7 @@ class zattooGUI(xbmcgui.WindowXMLDialog):
     if action in [ACTION_PARENT_DIR, KEY_NAV_BACK, ACTION_PREVIOUS_MENU]:
       if hasattr(self, 'hideNrTimer'): self.hideNrTimer.cancel()
       self.close()
-      xbmc.executebuiltin("Action(Stop)")
+      #xbmc.executebuiltin("Action(Stop)")
     if action==ACTION_STOP:
       if hasattr(self, 'hideNrTimer'): self.hideNrTimer.cancel()
       self.close()
