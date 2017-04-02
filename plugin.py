@@ -586,8 +586,11 @@ def makeOsdInfo():
   channel_id=_zattooDB_.get_playing()['channel']
   channelInfo = _zattooDB_.get_channelInfo(channel_id)
   program = _zattooDB_.getPrograms({'index':[channel_id]}, True, datetime.datetime.now(), datetime.datetime.now())
-  program=program[0]
-  
+  try:
+    program=program[0]
+  except:
+    xbmcgui.Dialog().ok('Error',' ','No Info')
+    
   description = program['description']
   if description is None: description = ''
   else: description = '  -  ' + description
@@ -654,8 +657,9 @@ class zattooGUI(xbmcgui.WindowXMLDialog):
     _zattooDB_=ZattooDB()
     channel=_zattooDB_.get_playing()['channel']
     channeltitle=_zattooDB_.get_channeltitle(channel)
-    program = _zattooDB_.getPrograms({'index':[channel]}, True, datetime.datetime.now(), datetime.datetime.now())
-    program=program[0]
+    #program = _zattooDB_.getPrograms({'index':[channel]}, True, datetime.datetime.now(), datetime.datetime.now())
+    #program = program[0]
+  
     #print('ZATTOOGUI BUTTON'+str(action.getButtonCode()))
     #print('ZATTOOGUI ACTIONID'+str(action.getId()))
     self.channelInputCtrl.setVisible(False)
@@ -760,7 +764,9 @@ class zattooOSD(xbmcgui.WindowXMLDialog):
     channel=_zattooDB_.get_playing()['channel']
     channeltitle=_zattooDB_.get_channeltitle(channel)
     program = _zattooDB_.getPrograms({'index':[channel]}, True, datetime.datetime.now(), datetime.datetime.now())
+
     program=program[0]
+
     self.close() #close OSD
 
     if controlID==209: #recall
