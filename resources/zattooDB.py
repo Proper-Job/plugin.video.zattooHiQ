@@ -29,7 +29,7 @@ _listMode_ = __addon__.getSetting('channellist')
 _channelList_=[]
 localString = __addon__.getLocalizedString
 local = xbmc.getLocalizedString
-
+DEBUG = __addon__.getSetting('debug')
 _umlaut_ = {ord(u'ä'): u'ae', ord(u'ö'): u'oe', ord(u'ü'): u'ue', ord(u'ß'): u'ss'}
 
 REMOTE_DBG = False
@@ -58,8 +58,9 @@ class ZattooDB(object):
 
   def zapiSession(self):
     zapiSession   = ZapiSession(xbmc.translatePath(__addon__.getAddonInfo('profile')).decode('utf-8'))
+    if DEBUG: print "APIURL " + str( __addon__.getSetting('api_url'))
     if zapiSession.init_session(__addon__.getSetting('username'), __addon__.getSetting('password'),
-                                __addon__.getSetting('api_url'), __addon__.getSetting('api_auth_url')):
+                                __addon__.getSetting('zapi_url'), __addon__.getSetting('zapi_auth_url')):
       return zapiSession
     else:
       # show home window, zattooHiQ settings and quit

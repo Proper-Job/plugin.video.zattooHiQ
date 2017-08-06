@@ -83,11 +83,11 @@ def start():
     endTime=datetime.datetime.now()+datetime.timedelta(minutes = 20)
 
 
-    xbmcgui.Dialog().notification(localString(31916), localString(30110),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False)
+    #xbmcgui.Dialog().notification(localString(31916), localString(30110),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False)
     _zattooDB_.getProgInfo(True, startTime, endTime)
 
     if SWISS == 'true':
-        xbmcgui.Dialog().notification(localString(31106), localString(31915),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False)
+        #xbmcgui.Dialog().notification(localString(31106), localString(31915),  __addon__.getAddonInfo('path') + '/icon.png', 3000, False)
         #xbmc.executebuiltin("ActivateWindow(busydialog)")
         recInfo()
         _library_.delete_library() # add by samoth
