@@ -40,16 +40,16 @@ def refreshProg():
         #update programInfo
         startTime=datetime.datetime.now()
         endTime=datetime.datetime.now()+datetime.timedelta(minutes = 120)
-        print 'StartRefresh  ' + str(datetime.datetime.now())
+        #print 'StartRefresh  ' + str(datetime.datetime.now())
 
         try:
             getProgNextDay()
-            print "Next Day"
+            #print "Next Day"
             _zattooDB_.getProgInfo(False, startTime, endTime)
         except:
-            print 'ERROR on REFRESH'
+            #print 'ERROR on REFRESH'
             pass
-        print "REFRESH Prog  " + str(datetime.datetime.now())
+        #print "REFRESH Prog  " + str(datetime.datetime.now())
 
 def recInfo():
     import urllib
@@ -105,7 +105,7 @@ def getProgNextDay():
     tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
 
     if now > start:
-        print 'NextDay ' + str(start) + ' - ' + str(now) + ' - ' + str(tomorrow)
+        #print 'NextDay ' + str(start) + ' - ' + str(now) + ' - ' + str(tomorrow)
         _zattooDB_.updateProgram(tomorrow)
 
 

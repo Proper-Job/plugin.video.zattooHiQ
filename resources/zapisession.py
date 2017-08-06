@@ -120,7 +120,7 @@ class ZapiSession:
 
 		handle = urllib2.urlopen(self.ZAPI_URL + '/')
 		html = handle.read()
-		print "App-Token:" + str(re.search("window\.appToken\s*=\s*'(.*)'", html).group(1))
+		#print "App-Token:" + str(re.search("window\.appToken\s*=\s*'(.*)'", html).group(1))
 		return re.search("window\.appToken\s*=\s*'(.*)'", html).group(1)
 		
 

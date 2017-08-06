@@ -381,6 +381,9 @@ msgctxt "#310095"
 msgid "last played channel"
 msgstr "letzter gespielter Kanal"
 
+msgctxt "#310096"
+msgid "Debug"
+msgstr "Debug"
 
 
 ### EPG/Aufnahmen ###

@@ -399,6 +399,9 @@ msgctxt "#31009"
 msgid "select Channel"
 msgstr ""
 
+msgctxt "#310096"
+msgid "Debug"
+msgstr "Debug"
 
 
 ### EPG/Aufnahmen ###
